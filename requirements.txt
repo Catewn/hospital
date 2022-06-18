@@ -7,4 +7,3 @@ chardet==4.0.0
 requests==2.27.1
 uvicorn==0.17.6
 streamlit==0.89.0
-streamlit-aggrid==0.2.3.post 2
