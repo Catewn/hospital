@@ -2,6 +2,8 @@ from st_aggrid import AgGrid
 import streamlit as st
 import pandas as pd
 from PIL import Image
+import warnings
+warnings.filterwarnings('ignore')
 
 st.title('Hospitals In Kenya Web App')
 st.markdown("""
