@@ -1,8 +1,6 @@
 from st_aggrid import AgGrid
 import streamlit as st
 import pandas as pd
-import altair as alt
-from itertools import cycle
 from PIL import Image
 
 st.title('Hospitals In Kenya Web App')
