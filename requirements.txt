@@ -7,3 +7,4 @@ chardet
 requests
 uvicorn
 streamlit
+streamlit-aggrid
