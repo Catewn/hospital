@@ -10,13 +10,13 @@ st.markdown("""
 st.header('Hospitals Dataset')
 st.markdown("""Data source: OpenData portal""")
 
-Data = pd.read_csv(r"C:\Users\User\Desktop\Hospital Recommendor\Kenya-hospitals.csv")
+Data = pd.read_csv("Kenya-hospitals.csv")
 print(Data.head())
 st.write(Data)
 
 st.title("Advanced Search")
 st.markdown("""For the advanced search we will use the filter feature to determine the best facility in an area using the most important features as per the feature importance bar chart""")
-df = pd.read_csv(r"C:\Users\User\Desktop\Hospital Recommendor\Kenya-hospitals.csv")
+df = pd.read_csv("Kenya-hospitals.csv")
 AgGrid(df)
 
 st.title("Machine Learning")
