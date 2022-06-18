@@ -10,3 +10,4 @@ streamlit
 streamlit-aggrid
 pandas
 image
+worker
