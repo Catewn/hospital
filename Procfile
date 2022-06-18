@@ -1,1 +1,1 @@
-web: python hospital.py runserver 0.0.0.0:$PORT
+web: sh setup.sh && streamlit run hospital.py
