@@ -1,1 +1,2 @@
 gunicorn==19.0.0
+favicon==0.7.0
