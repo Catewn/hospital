@@ -1,2 +1,1 @@
-web: python hospital.py runserver
-web: gunicorn --pythonpath path_wsgi_application --log-file
+web: python hospital.py runserver 0.0.0.0:$PORT
