@@ -15,12 +15,13 @@ print(Data.head())
 st.write(Data)
 
 st.title("Advanced Search")
-st.markdown("""For the advanced search we will use the filter feature to determine the best facility in an area using the most important features as per the feature importance bar chart""")
+st.markdown("""For this section we will use the filter feature to choose the best facility in an area""")
 df = pd.read_csv("Kenya-hospitals.csv")
 AgGrid(df)
 
 st.title("Machine Learning")
-st.markdown("""A machine learning model was used to predict the best hospital in an Area. The target variable used was the Keph Level""")
+st.markdown("""A machine learning model was used to predict the best hospital in an Area. The Keph Level column was chosen as the target variable. This is because the Keph levels represent the six levels of health care service delivery in Kenya""")
+
 st.subheader('The six levels of health care service delivery in Kenya')
 image = Image.open('The-six-levels-of-health-care-service-delivery-in-Kenya.png')
 st.image(image, caption='Keph_levels in a nutshell')
@@ -39,7 +40,7 @@ st.markdown("""The best features in predicting the best hospital in an area incl
 
 2.Facility type category
 
-3.Availability :Openwhole day, open weekends
+3.Availability :Open whole day, open weekends
 
 4.Owner type
 """)
