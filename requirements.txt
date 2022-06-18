@@ -1,1 +1,1 @@
-gunicorn application:app`
+gunicorn==19.0.0
