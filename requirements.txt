@@ -11,3 +11,5 @@ streamlit-aggrid
 pandas
 image
 worker
+sklearn
+numpy

@@ -29,8 +29,7 @@ st.sidebar.header('Facility Details')
 def user_input_features():
     Keph_level = st.sidebar.selectbox('Keph_level', ('Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6'))
 
-    Facility_type_category = st.sidebar.selectbox('Facility_type_category', (
-    'DISPENSARY', 'HEALTH CARE', 'HOSPITALS', 'MEDICAL CENTER', 'MEDICAL CLINIC', 'None', 'NURSING HOME', 'STAND ALONE', 'Primary healthcare services'))
+    Facility_type_category = st.sidebar.selectbox("Select Code", Data["Code"].unique())ONE', 'Primary healthcare services'))
 
     Owner_type = st.sidebar.selectbox('Owner_type', ('Faith Based Organization', 'Ministry of Health', 'Non-Governmental Organizations', 'Private Practice'))
 
