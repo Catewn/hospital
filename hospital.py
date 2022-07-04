@@ -151,6 +151,7 @@ def Home():
     print(Data.head())
     st.write(Data)
 
+
 def Advanced_Search():
     st.title("Advanced Search")
     st.markdown("""For this section we will use the filter feature to filter through the most important attributes in the dataset according to the feature importance chart. """)
@@ -174,6 +175,7 @@ def Advanced_Search():
         5. Finally, input the owner of the facility you would wish to visit
     """)
 
+
 def Search_using_input_features():
     st.markdown("""For this section we will use the most input features to filter through the data according to the feature importance chart """)
     st.sidebar.header('User Input Features')
@@ -187,10 +189,10 @@ def Search_using_input_features():
     st.sidebar.header('Facility Details')
     Keph_level = st.sidebar.selectbox('Keph_level', ('Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6'))
     Facility_type_category = st.sidebar.selectbox('Facility_type_category', (
-    'DISPENSARY', 'HEALTH CARE', 'HOSPITALS', 'MEDICAL CENTER', 'MEDICAL CLINIC', 'NURSING HOME', 'STAND ALONE',
-    'Primary health care services'))
+        'DISPENSARY', 'HEALTH CENTRE', 'HOSPITALS', 'MEDICAL CENTER', 'MEDICAL CLINIC', 'NURSING HOME', 'STAND ALONE',
+        'Primary health  care services', 'None'))
     Owner_type = st.sidebar.selectbox('Owner_type', (
-    'Faith Based Organization', 'Ministry of Health', 'Non-Governmental Organizations', 'Private Practice'))
+        'Faith Based Organization', 'Ministry of Health', 'Non-Governmental Organizations', 'Private Practice'))
     st.sidebar.header('Availability')
     Open_whole_day = st.sidebar.selectbox('Open_whole_day', ('Yes', 'No'))
     Open_public_holidays = st.sidebar.selectbox('Open_public_holidays', ('Yes', 'No'))
@@ -214,6 +216,7 @@ def Search_using_input_features():
         
         5. Finally, input the owner of the facility you would wish to visit
     """)
+
 
 def Machine_Learning():
     st.title("Machine Learning")
@@ -268,54 +271,50 @@ def Machine_Learning():
         Therefore, to predict the best hospital to visit a patient can input the Level of facility the  model has predicted, the location they chose, the category they chose, the availability they chose, the owner type they chose to get a list of facilities in their area that fit their description 
      """)
 
+
 def prediction_features():
     def input_features():
         st.sidebar.header('Input Features')
         input_df = pd.read_csv("Kenya-hospitals_cleaned.csv")
-        county_codes = st.sidebar.selectbox('country_codes',input_df["county_codes"].unique())
-        facility_category = st.sidebar.selectbox('Facility_category', ('DISPENSARY', 'HEALTH CARE', 'HOSPITALS', 'MEDICAL CENTER', 'MEDICAL CLINIC', 'NURSING HOME', 'STAND ALONE', 'Primary health care services'))
+        county = st.sidebar.selectbox('County', input_df["County"].unique())
+        facility_category = st.sidebar.selectbox('Facility_category', ('DISPENSARY', 'HEALTH CENTRE', 'HOSPITALS', 'MEDICAL CENTER', 'MEDICAL CLINIC', 'NURSING HOME', 'STAND ALONE', 'Primary health  care services', 'None'))
         owner = st.sidebar.selectbox('Owner', ('Faith Based Organization', 'Ministry of Health', 'Non-Governmental Organizations', 'Private Practice'))
         whole_day = st.sidebar.selectbox('whole_day', ('Yes', 'No'))
         public_holidays = st.sidebar.selectbox('public_holidays', ('Yes', 'No'))
         weekends = st.sidebar.selectbox('weekends', ('Yes', 'No'))
         late_night = st.sidebar.selectbox('late_night', ('Yes', 'No'))
-        data = {'county_codes': county_codes,
-            'facility_category': facility_category,
-            'owner': owner,
-            'whole_day':  whole_day,
-            'open_public_holidays': public_holidays,
-            'open_weekends': weekends,
-            'late_night': late_night}
-        features = pd.DataFrame(data, index=[0])
+        lookup_dict1 = {'Mombasa': 1, 'Kwale': 2, 'Kilifi': 3, 'Tana River': 4, 'Lamu': 5, 'Taita Taveta': 6, 'Garissa': 7, 'Wajir': 8, 'Mandera': 9, 'Marsabit': 10, 'Isiolo': 11, 'Meru': 12, 'Tharaka Nithi': 13, 'Embu': 14, 'Kitui': 15, 'Machakos': 16, 'Makueni': 17, 'Nyandarua': 18, 'Nyeri': 19, 'Kirinyaga': 20, 'Muranga': 21, 'Kiambu': 22, 'Turkana': 23, 'West Pokot': 24, 'Samburu': 25, 'Trans Nzoia': 26, 'Uasin Gishu': 27, 'Elgeyo Marakwet': 28, 'Nandi': 29, 'Baringo': 30, 'Laikipia': 31, 'Nakuru': 32, 'Narok': 33, 'Kajiado': 34, 'Kericho': 35, 'Bomet': 36, 'Kakamega': 37, 'Vihiga': 38, 'Bungoma': 39, 'Busia': 40, 'Siaya': 41, 'Kisumu': 42, 'Homa Bay': 43, 'Migori': 44, 'Kisii': 45, 'Nyamira': 46, 'Nairobi': 47}
+        lookup_dict2 = {'DISPENSARY': 0, 'HEALTH CENTRE': 1, 'HOSPITALS': 2, 'MEDICAL CENTER': 3, 'MEDICAL CLINIC': 4, 'NURSING HOME': 5, 'STAND ALONE': 6, 'Primary health care services': 7}
+        lookup_dict3 = {'Faith Based Organization': 0, 'Ministry of Health': 1, 'Non-Governmental Organizations': 2, 'Private Practice': 3}
+        lookup_dict4 = {"Yes": 1, "No": 0}
+        dict = {'county': [lookup_dict1[county]],
+                'facility_category': [lookup_dict2[facility_category]],
+                'owner': [lookup_dict3[owner]],
+                'whole_day': [lookup_dict4[whole_day]],
+                "public_holidays": [lookup_dict4[public_holidays]],
+                "weekends": [lookup_dict4[weekends]],
+                "late_night": [lookup_dict4[late_night]],
+                }
+        features = pd.DataFrame(dict, index=[0])
         return features
     input_df = input_features()
-    #st.dataframe(input_df)
-
-    # Ordinal feature encoding
-    hospital = pd.read_csv('Kenya-hospitals_cleaned.csv')
-    hospitals = hospital.drop(columns=['KEPH'], axis=1)
-    Df = pd.concat([input_df, hospitals], axis=0)
-    encode = ['Facility_category','Owner', 'whole_day', 'public_holidays', 'weekends', 'late_night']
-
-    for col in encode:
-        dummy = pd.get_dummies(Df[col], prefix=col)
-        Df = pd.concat([Df,dummy], axis=1)
-        del Df[col]
-        Df = Df[:1]
+    st.write(input_df)
 
     # Reads in saved classification model
-    load_clf = pickle.load(open('hospitals_clf.pkl', 'rb'))
+    load_clf = pickle.load(open('clf.pkl', 'rb'))
     # Apply model to make predictions
-    prediction = load_clf.predict(Df)
-    prediction_proba = load_clf.predict_proba(Df)
+    prediction = load_clf.predict(input_df)
+    prediction_proba = load_clf.predict_proba(input_df)
     st.subheader('Prediction')
-    hospital_levels = np.array(['Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6'])
-    st.write(hospital_levels[prediction])
+    clf_KEPH = np.array(['Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6'])
+    st.write(clf_KEPH[prediction])
 
     st.subheader('Prediction Probability')
     st.write(prediction_proba)
 
 # Sidebar navigation
+
+
 st.sidebar.title('Navigation')
 options = st.sidebar.radio('Select what you want to display:', ['Home', 'Advanced Search', 'Search Using Input Features', 'Machine Learning', 'Prediction Features'])
 
