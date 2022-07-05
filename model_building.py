@@ -89,13 +89,13 @@ def target_encode(val):
 
 Df['KEPH'] = Df['KEPH'].apply(target_encode)
 # Separating X and y
-X = Df.drop('KEPH', axis=1)
-Y = Df['KEPH']
+X = Df[:6500].drop('KEPH', axis=1)
+Y = Df['KEPH'][:6500]
 
 # Build random forest model
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
 
-clf = KNeighborsClassifier()
+clf = RandomForestClassifier()
 clf.fit(X, Y)
 
 # Saving the model

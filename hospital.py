@@ -15,7 +15,7 @@ def Home():
         Each health facility is identified by a code followed by details describing the geographical location, facility type, ownership, and availability of the facility.
         """)
     st.markdown("""
-        The aim of this app is to predict the best hospital to visit in an area using machine learning. There is a definite huge demand for the best Medicare for patients. The challenge most patients face in Kenya is how to choose the best hospital to visit among various hospitals in an area. 
+        The aim of this app is to predict the best hospital to visit in an area. There is a definite huge demand for the best Medicare for patients. The challenge most patients face in Kenya is how to choose the best hospital to visit among various hospitals in an area. 
         
         The KNN supervised machine learning approach is used to predict the best hospital for the patient according to the services they require on the basis of various attributes used in the dataset. 
         
@@ -172,7 +172,7 @@ def Advanced_Search():
          
         4. Based on the time you want to visit you will input your desired availability eg. open whole day
         
-        5. Finally, input the owner of the facility you would wish to visit
+        5. Finally, input the owner of the facility you would wish to visit to get a list of hospitals that fit your description
     """)
 
 
@@ -209,12 +209,12 @@ def Search_using_input_features():
         2. Input your county, sub county, constituency and ward to get the facility closest to you. 
          
         3. Input the category of facility you wish to visit
-         
-         Side note: Most level 2 facilities are either in the category, Medical clinic or stand alone or dispensary and they are mostly private practice. Level 3 facilities are either in the category Health centre, Nursing home or Medical Center. Level 4, Level 5 and Level 6 are all in the category Hospitals 
-         
+        
+        Side note: Most level 2 facilities are either in the category, Medical clinic or stand alone or dispensary and they are mostly private practice. Level 3 facilities are either in the category Health centre, Nursing home or Medical Center. Level 4, Level 5 and Level 6 are all in the category Hospitals 
+                  
         4. Based on the time you want to visit you will input your desired availability
         
-        5. Finally, input the owner of the facility you would wish to visit
+        5. Finally, input the owner of the facility you would wish to visit to get a list of hospitals that fit your description
     """)
 
 
@@ -230,7 +230,7 @@ def Machine_Learning():
     st.markdown("""
         These are the attributes that were used to train and test the model: They were classified into three:
     
-        1. Administrative unit/ Location: County codes 
+        1. Administrative unit/ Location: County 
     
         2. Facility information: Facility type category, Owner type, Regulatory body
         
@@ -268,7 +268,7 @@ def Machine_Learning():
      
         This means that given the patient location, the category of the facility they want to visit, the patients availability and the owner of the facility the patient wishes to visit. our model is able to predict the level of the facility that is most suitable.
         
-        Therefore, to predict the best hospital to visit a patient can input the Level of facility the  model has predicted, the location they chose, the category they chose, the availability they chose, the owner type they chose to get a list of facilities in their area that fit their description 
+        Therefore, to predict the best hospital to visit a patient can input the Level of facility the  model has predicted from the prediction features page, the location they chose, the category they chose, the availability they chose, the owner type they chose either in the Advanced Search page or the Search Using Input Features page to get a list of facilities in their area that fit their description 
      """)
 
 
@@ -284,7 +284,7 @@ def prediction_features():
         weekends = st.sidebar.selectbox('weekends', ('Yes', 'No'))
         late_night = st.sidebar.selectbox('late_night', ('Yes', 'No'))
         lookup_dict1 = {'Mombasa': 1, 'Kwale': 2, 'Kilifi': 3, 'Tana River': 4, 'Lamu': 5, 'Taita Taveta': 6, 'Garissa': 7, 'Wajir': 8, 'Mandera': 9, 'Marsabit': 10, 'Isiolo': 11, 'Meru': 12, 'Tharaka Nithi': 13, 'Embu': 14, 'Kitui': 15, 'Machakos': 16, 'Makueni': 17, 'Nyandarua': 18, 'Nyeri': 19, 'Kirinyaga': 20, 'Muranga': 21, 'Kiambu': 22, 'Turkana': 23, 'West Pokot': 24, 'Samburu': 25, 'Trans Nzoia': 26, 'Uasin Gishu': 27, 'Elgeyo Marakwet': 28, 'Nandi': 29, 'Baringo': 30, 'Laikipia': 31, 'Nakuru': 32, 'Narok': 33, 'Kajiado': 34, 'Kericho': 35, 'Bomet': 36, 'Kakamega': 37, 'Vihiga': 38, 'Bungoma': 39, 'Busia': 40, 'Siaya': 41, 'Kisumu': 42, 'Homa Bay': 43, 'Migori': 44, 'Kisii': 45, 'Nyamira': 46, 'Nairobi': 47}
-        lookup_dict2 = {'DISPENSARY': 0, 'HEALTH CENTRE': 1, 'HOSPITALS': 2, 'MEDICAL CENTER': 3, 'MEDICAL CLINIC': 4, 'NURSING HOME': 5, 'STAND ALONE': 6, 'Primary health care services': 7}
+        lookup_dict2 = {'DISPENSARY': 0, 'HEALTH CENTRE': 1, 'HOSPITALS': 2, 'MEDICAL CENTER': 3, 'MEDICAL CLINIC': 4, 'NURSING HOME': 5, 'STAND ALONE': 6, 'Primary health  care services': 7, 'None': 8}
         lookup_dict3 = {'Faith Based Organization': 0, 'Ministry of Health': 1, 'Non-Governmental Organizations': 2, 'Private Practice': 3}
         lookup_dict4 = {"Yes": 1, "No": 0}
         dict = {'county': [lookup_dict1[county]],
