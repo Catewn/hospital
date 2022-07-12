@@ -1,9 +1,9 @@
 import pandas as pd
 # Ordinal feature encoding
-hospital = pd.read_csv('Kenya-hospitals_cleaned.csv')
+hospital = pd.read_csv('hospitals_cleaned.csv')
 Df = hospital.copy()
 county = 'County'
-county_mapper= {'Mombasa': 1, 'Kwale': 2, 'Kilifi': 3, 'Tana River': 4, 'Lamu': 5, 'Taita Taveta': 6, 'Garissa': 7,
+county_mapper = {'Mombasa': 1, 'Kwale': 2, 'Kilifi': 3, 'Tana River': 4, 'Lamu': 5, 'Taita Taveta': 6, 'Garissa': 7,
                 'Wajir': 8, 'Mandera': 9, 'Marsabit': 10, 'Isiolo': 11, 'Meru': 12, 'Tharaka Nithi': 13, 'Embu': 14,
                 'Kitui': 15, 'Machakos': 16, 'Makueni': 17, 'Nyandarua': 18, 'Nyeri': 19, 'Kirinyaga': 20,
                 'Muranga': 21, 'Kiambu': 22, 'Turkana': 23, 'West Pokot': 24, 'Samburu': 25, 'Trans Nzoia': 26,
@@ -89,15 +89,26 @@ def target_encode(val):
 
 Df['KEPH'] = Df['KEPH'].apply(target_encode)
 # Separating X and y
-X = Df[:6500].drop('KEPH', axis=1)
-Y = Df['KEPH'][:6500]
+X = Df.drop('KEPH', axis=1)
+Y = Df['KEPH']
 
-# Build random forest model
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=1)
 
-clf = RandomForestClassifier()
-clf.fit(X, Y)
+from sklearn.preprocessing import StandardScaler
+ss = StandardScaler()
+ss_train = ss.fit_transform(X_train)
+X_train_ss = pd.DataFrame(ss_train)
+X_train_ss.columns = X_train.columns
 
-# Saving the model
+from imblearn.over_sampling import SMOTE
+oversample = SMOTE(k_neighbors=3)
+X_train_ss_over, Y_train_over = oversample.fit_resample(X_train_ss, Y_train)
+
+ #Build random forest model
+from sklearn.ensemble import ExtraTreesClassifier
+clf = ExtraTreesClassifier()
+clf.fit(X_train_ss_over, Y_train_over)
+
 import pickle
 pickle.dump(clf, open('clf.pkl', 'wb'))

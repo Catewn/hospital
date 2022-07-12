@@ -160,7 +160,7 @@ def Advanced_Search():
 
     st.markdown("""
         
-        Which means to determine the best hospital to visit you will have to:
+        To determine the best hospital to visit in an area:
         
         1. Identify the service you require from the KEPH level service display on the home page and input the KEPH level
          
@@ -177,7 +177,7 @@ def Advanced_Search():
 
 
 def Search_using_input_features():
-    st.markdown("""For this section we will use the most input features to filter through the data according to the feature importance chart """)
+    st.markdown("""For this section we will use the most important input features to filter through the data according to the feature importance chart """)
     st.sidebar.header('User Input Features')
     Data = pd.read_csv("Kenya-hospitals.csv")
     st.sidebar.header('Facility Info')
@@ -202,7 +202,7 @@ def Search_using_input_features():
     st.dataframe(df_selected_team)
 
     st.markdown("""
-        Which means to determine the best hospital to visit you will have to:
+        To determine the best hospital to visit in an area:
         
         1. Identify the service you require from the KEPH level service display on the home page and input the KEPH level
          
@@ -275,7 +275,7 @@ def Machine_Learning():
 def prediction_features():
     def input_features():
         st.sidebar.header('Input Features')
-        input_df = pd.read_csv("Kenya-hospitals_cleaned.csv")
+        input_df = pd.read_csv("hospitals_cleaned.csv")
         county = st.sidebar.selectbox('County', input_df["County"].unique())
         facility_category = st.sidebar.selectbox('Facility_category', ('DISPENSARY', 'HEALTH CENTRE', 'HOSPITALS', 'MEDICAL CENTER', 'MEDICAL CLINIC', 'NURSING HOME', 'STAND ALONE', 'Primary health  care services', 'None'))
         owner = st.sidebar.selectbox('Owner', ('Faith Based Organization', 'Ministry of Health', 'Non-Governmental Organizations', 'Private Practice'))
@@ -304,14 +304,13 @@ def prediction_features():
     load_clf = pickle.load(open('clf.pkl', 'rb'))
     # Apply model to make predictions
     prediction = load_clf.predict(input_df)
-    prediction_proba = load_clf.predict_proba(input_df)
+    #prediction_proba = load_clf.predict_proba(input_df)
     st.subheader('Prediction')
     clf_KEPH = np.array(['Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6'])
     st.write(clf_KEPH[prediction])
 
-    st.subheader('Prediction Probability')
-    st.write(prediction_proba)
-
+    #st.subheader('Prediction Probability')
+    #st.write(prediction_proba)
 # Sidebar navigation
 
 

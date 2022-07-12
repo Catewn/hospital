@@ -13,3 +13,4 @@ image
 worker
 sklearn
 numpy
+scikit-learn==1.0.0
