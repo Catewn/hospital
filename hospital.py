@@ -12,14 +12,14 @@ def Home():
     st.title('Hospitals In Kenya Web App')
     st.markdown("""
         Hospitals in Kenya web app is an application containing all health facilities in Kenya. 
-        Each health facility is identified by a code followed by details describing the geographical location, facility type, ownership, and availability of the facility.
+        Each health facility has details describing its geographical location, facility type, ownership, and availability.
         """)
     st.markdown("""
         The aim of this app is to predict the best hospital to visit in an area. There is a definite huge demand for the best Medicare for patients. The challenge most patients face in Kenya is how to choose the best hospital to visit among various hospitals in an area. 
         
         The KNN supervised machine learning approach is used to predict the best hospital for the patient according to the services they require on the basis of various attributes used in the dataset. 
         
-        The research is based on healthcare facilities in Kenya. The healthcare facilities are classified into five categories representing KEPH levels. KEPH is an acronym for, Kenya Essential Package for Health (KEPH). The KEPH introduced six cohort levels of health service provision, with Level 1 being the Community Facilities, Level 2 being the Health Dispensaries, Level 3 being the Health Centers, Level 4 being the County Hospitals, Level 5 being the County Referral Hospitals and Level 6 being the National Referral Hospitals. For this app, we will only use five levels which include: Level 2, Level 3, Level 4, Level 5 and Level 6. The dataset contains all types of hospitals approved by the Ministry of Health in Kenya. 
+        The research is based on healthcare facilities in Kenya. The healthcare facilities are classified into six categories representing KEPH levels. KEPH is an acronym for, Kenya Essential Package for Health (KEPH). The KEPH introduced six cohort levels of health service provision, with Level 1 being the Community Facilities, Level 2 being the Health Dispensaries, Level 3 being the Health Centers, Level 4 being the County Hospitals, Level 5 being the County Referral Hospitals and Level 6 being the National Referral Hospitals. For this app, we will only use five levels which include: Level 2, Level 3, Level 4, Level 5 and Level 6. The dataset contains all types of hospitals approved by the Ministry of Health in Kenya. 
         
         The reason as to why the healthcare facilities are classified into KEPH levels is because they represent the six different levels of health care service delivery in Kenya. 
     """)
@@ -221,7 +221,7 @@ def Search_using_input_features():
 def Machine_Learning():
     st.title("Machine Learning")
     st.markdown(
-        """A machine learning model was used to predict whether a patient should visit a Level 2 or a level 3 or a Level 4 or a Level 5 or a Level 6 medical facility hence predicting the best hospital in an Area based on a given set of attributes. The Keph Level column was chosen as the target variable. This is because the Keph levels represent the six levels of health care service delivery in Kenya""")
+        """A machine learning model was used to predict whether a patient should visit a Level 2, level 3, Level 4,  Level 5 or a Level 6 medical facility.The reason as to why the app focuses on predicting the level of facility a patient should visit is because, in an effort to receive the best Medicare patients tend to visit Level 5 and Level 6 hospitals for minor cases while these facilities are equiped to handle major cases hence causing overcrowding in these facilities and causing patients with major medical cases not to receive the attention they require. This app solves the above problem by helping a patient pick the best facility to visit based on a given set of attributes.""")
 
     st.subheader('Keph_levels Bar Chart ')
     image = Image.open('Keph_level.png')
